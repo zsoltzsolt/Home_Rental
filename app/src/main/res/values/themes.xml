@@ -13,4 +13,16 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="WhiteButton">
+        <item name = "android:backgroundTint">@color/white</item>
+        <item name = "android:textColor">@color/purple_500</item>
+    </style>
+
+    <style name="GreyButton">
+        <item name = "backgroundTint">@color/grey</item>
+        <item name="android:textColor">@color/purple_500</item>
+        <item name="android:enabled">false</item>
+    </style>
+
 </resources>
