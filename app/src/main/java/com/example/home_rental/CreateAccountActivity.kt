@@ -17,6 +17,9 @@ import com.google.android.material.shape.ShapeAppearanceModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 import com.jakewharton.rxbinding2.widget.RxRadioGroup
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.plugins.RxJavaPlugins
@@ -35,6 +38,7 @@ class CreateAccountActivity : AppCompatActivity() {
     private lateinit var rb2 : RadioButton
     private lateinit var radio: RadioGroup
     private lateinit var auth: FirebaseAuth
+    private lateinit var databaseReference: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +46,8 @@ class CreateAccountActivity : AppCompatActivity() {
 
         //Authentication
         auth = FirebaseAuth.getInstance()
+        databaseReference = FirebaseDatabase.getInstance().getReference("users")
+
 
         btn_register = findViewById<Button>(R.id.btn_register)
         tv_goToLogin = findViewById<TextView>(R.id.tv_goToLogin)
@@ -184,6 +190,13 @@ class CreateAccountActivity : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     Toast.makeText(this, "Contul a fost creat cu succes!", Toast.LENGTH_SHORT).show()
+                    val user = FirebaseAuth.getInstance().currentUser
+                    val fullName = tie_full_name.text.toString().trim()
+                    val username = tie_username.text.toString().trim()
+                    val rb1 = rb1.isChecked
+                    val rb2 = rb2.isChecked
+                    val userData = User(fullName, username, rb1, rb2)
+                    databaseReference.child(user?.uid.toString()).setValue(userData)
                 }else{
                     Toast.makeText(this, it.exception?.message, Toast.LENGTH_SHORT).show()
                 }
