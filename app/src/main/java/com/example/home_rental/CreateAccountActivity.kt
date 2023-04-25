@@ -16,6 +16,7 @@ import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.ShapeAppearanceModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.auth.FirebaseAuth
 import com.jakewharton.rxbinding2.widget.RxRadioGroup
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.plugins.RxJavaPlugins
@@ -33,11 +34,14 @@ class CreateAccountActivity : AppCompatActivity() {
     private lateinit var rb1 : RadioButton
     private lateinit var rb2 : RadioButton
     private lateinit var radio: RadioGroup
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_account)
 
+        //Authentication
+        auth = FirebaseAuth.getInstance()
 
         btn_register = findViewById<Button>(R.id.btn_register)
         tv_goToLogin = findViewById<TextView>(R.id.tv_goToLogin)
@@ -142,9 +146,9 @@ class CreateAccountActivity : AppCompatActivity() {
         }
 
         btn_register.setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java)
-            startActivity(intent)
-            finish()
+            val email = tie_email.text.toString().trim()
+            val password = tie_password1.text.toString().trim()
+            registerUser(email, password)
         }
 
 
@@ -169,5 +173,21 @@ class CreateAccountActivity : AppCompatActivity() {
         tie_password2.error = if(isNotValid) "Parolele trebuie sa coincida" else null
     }
 
+    private fun registerUser(email: String, password: String){
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) {
+                if(it.isSuccessful){
+                    auth.currentUser?.sendEmailVerification()
+                        ?.addOnCompleteListener {
+                            Toast.makeText(this, "Verificati email-ul!", Toast.LENGTH_SHORT).show()
+                        }
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    Toast.makeText(this, "Contul a fost creat cu succes!", Toast.LENGTH_SHORT).show()
+                }else{
+                    Toast.makeText(this, it.exception?.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
 
 }
