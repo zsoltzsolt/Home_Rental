@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.auth.FirebaseAuth
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.Observable
 
@@ -18,6 +19,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var tv_goToRegister: TextView
     private lateinit var tie_email: TextInputEditText
     private lateinit var tie_password: TextInputEditText
+    private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -27,6 +29,7 @@ class LoginActivity : AppCompatActivity() {
         tie_email = findViewById<TextInputEditText>(R.id.tie_email)
         tie_password = findViewById<TextInputEditText>(R.id.tie_password)
 
+        auth = FirebaseAuth.getInstance()
 
         tv_goToRegister.setOnClickListener {
             val intent = Intent(this, CreateAccountActivity::class.java)
@@ -35,9 +38,9 @@ class LoginActivity : AppCompatActivity() {
         }
 
         btn_login.setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java)
-            finish()
-            startActivity(intent)
+            val email = tie_email.text.toString().trim()
+            val password = tie_password.text.toString().trim()
+            loginUser(email, password)
         }
 
         val email = RxTextView.textChanges(tie_email)
@@ -55,18 +58,37 @@ class LoginActivity : AppCompatActivity() {
         val invalidFields = Observable.combineLatest(
             email,
             password,
-            { emailInvalid: Boolean, passwordInvalid: Boolean ->
+            {emailInvalid: Boolean,passwordInvalid: Boolean ->
                 !emailInvalid && !passwordInvalid
             })
         invalidFields.subscribe { isValid ->
             if (isValid) {
                 btn_login.isEnabled = true
                 btn_login.backgroundTintList = ContextCompat.getColorStateList(this, R.color.white)
-            } else {
+            }else{
                 btn_login.isEnabled = false
                 btn_login.backgroundTintList = ContextCompat.getColorStateList(this, R.color.grey)
             }
         }
 
     }
+
+    private fun loginUser(email: String, password: String){
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this){ login ->
+                if(auth.currentUser?.isEmailVerified == false){
+                    Toast.makeText(this, "Adresa de email nu este verificata!", Toast.LENGTH_SHORT).show()
+                }
+                else if (login.isSuccessful){
+                    Intent(this, HomeActivity::class.java).also {
+                        it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(it)
+                        Toast.makeText(this, "Autentificare cu succes!", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(this, "Adresa de email sau parola incorecta!", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
 }
