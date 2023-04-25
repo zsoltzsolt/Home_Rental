@@ -183,13 +183,8 @@ class CreateAccountActivity : AppCompatActivity() {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) {
                 if(it.isSuccessful){
-                    auth.currentUser?.sendEmailVerification()
-                        ?.addOnCompleteListener {
-                            Toast.makeText(this, "Verificati email-ul!", Toast.LENGTH_SHORT).show()
-                        }
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
-                    Toast.makeText(this, "Contul a fost creat cu succes!", Toast.LENGTH_SHORT).show()
                     val user = FirebaseAuth.getInstance().currentUser
                     val fullName = tie_full_name.text.toString().trim()
                     val username = tie_username.text.toString().trim()
@@ -197,6 +192,10 @@ class CreateAccountActivity : AppCompatActivity() {
                     val rb2 = rb2.isChecked
                     val userData = User(fullName, username, rb1, rb2)
                     databaseReference.child(user?.uid.toString()).setValue(userData)
+                    auth.currentUser?.sendEmailVerification()
+                        ?.addOnCompleteListener {
+                            Toast.makeText(this, "Verificati adresa de email!", Toast.LENGTH_SHORT).show()
+                        }
                 }else{
                     Toast.makeText(this, it.exception?.message, Toast.LENGTH_SHORT).show()
                 }
