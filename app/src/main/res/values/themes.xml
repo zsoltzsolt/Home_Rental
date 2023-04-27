@@ -15,12 +15,12 @@
     </style>
 
     <style name="WhiteButton">
-        <item name = "android:backgroundTint">@color/white</item>
-        <item name = "android:textColor">@color/purple_500</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:textColor">@color/purple_500</item>
     </style>
 
     <style name="GreyButton">
-        <item name = "backgroundTint">@color/grey</item>
+        <item name="backgroundTint">@color/grey</item>
         <item name="android:textColor">@color/purple_500</item>
         <item name="android:enabled">false</item>
     </style>
@@ -36,5 +36,14 @@
     <style name="TextInputEditText" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="android:background">@drawable/bg_text_field</item>
     </style>
+
+    <style name="Theme.HomeRental.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.HomeRental.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.HomeRental.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>
