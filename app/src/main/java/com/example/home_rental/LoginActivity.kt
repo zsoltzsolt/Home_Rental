@@ -1,5 +1,6 @@
 package com.example.home_rental
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +11,9 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.getValue
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.Observable
 
@@ -20,9 +24,12 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var tie_email: TextInputEditText
     private lateinit var tie_password: TextInputEditText
     private lateinit var auth: FirebaseAuth
+    private lateinit var databaseReference: DatabaseReference
+    private lateinit var activity: Activity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
 
         btn_login = findViewById<Button>(R.id.btn_login)
         tv_goToRegister = findViewById<TextView>(R.id.tv_goToRegister)
@@ -80,11 +87,27 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this, "Adresa de email nu este verificata!", Toast.LENGTH_SHORT).show()
                 }
                 else if (login.isSuccessful){
-                    Intent(this, HomeActivity::class.java).also {
-                        it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        startActivity(it)
-                        Toast.makeText(this, "Autentificare cu succes!", Toast.LENGTH_SHORT).show()
+                    val user = FirebaseAuth.getInstance().currentUser
+                   databaseReference = FirebaseDatabase.getInstance().getReference("users").child(user?.uid.toString())
+
+                    databaseReference.child("client").get().addOnSuccessListener {
+                        if(it.getValue() == true){
+                            Intent(this, ClientMainActivity::class.java).also {
+                                it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                startActivity(it)
+                            }
+                        }
+                        else {
+                        Intent(this, OwnerMainActivity::class.java).also {
+                            it.flags =
+                                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            startActivity(it)
+                        }
                     }
+                    }.addOnFailureListener {
+                        Toast.makeText(this, "Some error occured", Toast.LENGTH_SHORT).show()
+                    }
+
                 } else {
                     Toast.makeText(this, "Adresa de email sau parola incorecta!", Toast.LENGTH_SHORT).show()
                 }
