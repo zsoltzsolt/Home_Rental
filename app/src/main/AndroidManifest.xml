@@ -12,18 +12,10 @@
         android:theme="@style/Theme.HomeRental"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity2"
-            android:exported="false"
-            android:label="@string/title_activity_main2"
-            android:theme="@style/Theme.HomeRental.NoActionBar" />
-        <activity
             android:name=".OwnerMainActivity"
             android:exported="false" />
         <activity
             android:name=".ClientMainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".HomeActivity"
             android:exported="false" />
         <activity
             android:name=".CreateAccountActivity"
