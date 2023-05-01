@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background3">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -193,6 +194,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="Parcare"
+            android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@id/btn_add_image"
             app:layout_constraintLeft_toLeftOf="parent"
             />
@@ -203,6 +205,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="Garaj"
+            android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@id/btn_add_image"
             app:layout_constraintLeft_toRightOf="@id/cb1"
             />
@@ -213,6 +216,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:text="Aer conditionat"
+            android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@id/btn_add_image"
             app:layout_constraintLeft_toRightOf="@id/cb2"
             />
@@ -223,6 +227,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="Gradina"
+            android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@id/cb1"
             app:layout_constraintLeft_toLeftOf="parent"
             />
@@ -233,6 +238,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="Balcon"
+            android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@id/cb1"
             app:layout_constraintLeft_toRightOf="@id/cb4"
             />
@@ -243,6 +249,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="Încălzire centrală"
+            android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@id/cb1"
             app:layout_constraintLeft_toRightOf="@id/cb5"
             />
@@ -253,6 +260,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="Piscina"
+            android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@id/cb4"
             app:layout_constraintLeft_toLeftOf="parent"
             />
@@ -263,6 +271,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="Internet"
+            android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@id/cb4"
             app:layout_constraintLeft_toRightOf="@id/cb7"
             />
@@ -273,6 +282,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="Mobilat/Utilat"
+            android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@id/cb4"
             app:layout_constraintLeft_toRightOf="@id/cb8"
             />
@@ -284,6 +294,7 @@
             android:layout_marginHorizontal="40dp"
             android:text="@string/posteaza_anuntul"
             app:layout_constraintTop_toBottomOf="@id/cb7"
+            style="@style/WhiteButton"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
