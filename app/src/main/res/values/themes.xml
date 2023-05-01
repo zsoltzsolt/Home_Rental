@@ -27,7 +27,7 @@
 
     <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="android:textColorHint">@color/grey</item>
-        <item name="hintTextColor">@color/grey</item>
+        <item name="hintTextColor">@color/purple_500</item>
         <item name="startIconTint">@color/purple_500</item>
     </style>
 
@@ -44,5 +44,6 @@
     <style name="Theme.HomeRental.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.HomeRental.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 
 </resources>

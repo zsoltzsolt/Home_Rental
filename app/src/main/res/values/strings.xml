@@ -26,4 +26,6 @@
     <string name="an_constructie">An constructie</string>
     <string name="tipul_imobil">Tipul imobil</string>
     <string name="titlul_anuntului">Titlul anuntului</string>
+    <string name="numar_camere">Numar camere</string>
+    <string name="telefon">Telefon</string>
 </resources>
