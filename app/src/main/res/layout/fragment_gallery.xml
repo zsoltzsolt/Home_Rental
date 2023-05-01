@@ -215,6 +215,19 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ti_rooms"/>
 
+        <TextView
+            android:id="@+id/tv_image_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="110dp"
+            android:text="Au fost adaugate 0 imagini"
+            android:textColor="@color/white"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_add_image"
+            />
+
         <CheckBox
             android:id="@+id/cb1"
             android:layout_width="wrap_content"
@@ -222,7 +235,7 @@
             android:layout_marginLeft="20dp"
             android:text="Parcare"
             android:textColor="@color/white"
-            app:layout_constraintTop_toBottomOf="@id/btn_add_image"
+            app:layout_constraintTop_toBottomOf="@id/tv_image_count"
             app:layout_constraintLeft_toLeftOf="parent"
             />
 
@@ -233,7 +246,7 @@
             android:layout_marginLeft="20dp"
             android:text="Garaj"
             android:textColor="@color/white"
-            app:layout_constraintTop_toBottomOf="@id/btn_add_image"
+            app:layout_constraintTop_toBottomOf="@id/tv_image_count"
             app:layout_constraintLeft_toRightOf="@id/cb1"
             />
 
@@ -244,7 +257,7 @@
             android:layout_marginLeft="30dp"
             android:text="Aer conditionat"
             android:textColor="@color/white"
-            app:layout_constraintTop_toBottomOf="@id/btn_add_image"
+            app:layout_constraintTop_toBottomOf="@id/tv_image_count"
             app:layout_constraintLeft_toRightOf="@id/cb2"
             />
 
@@ -361,7 +374,8 @@
             android:layout_marginHorizontal="40dp"
             android:text="@string/posteaza_anuntul"
             app:layout_constraintTop_toBottomOf="@id/ti_phone"
-            style="@style/WhiteButton" />
+            style="@style/WhiteButton"
+            android:layout_marginBottom="50dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

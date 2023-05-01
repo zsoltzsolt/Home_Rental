@@ -23,6 +23,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.NonDisposableHandle.parent
+import java.util.UUID
 
 class GalleryFragment : Fragment() {
 
@@ -33,6 +34,8 @@ class GalleryFragment : Fragment() {
     private lateinit var adapterItems: ArrayAdapter<String>
     private lateinit var storageRef: StorageReference
     private lateinit var auth: FirebaseAuth
+    private var image_count = 0
+    private lateinit var propertyID: UUID
 
     private val binding get() = _binding!!
 
@@ -41,6 +44,10 @@ class GalleryFragment : Fragment() {
         val root: View = binding.root
 
         auth = FirebaseAuth.getInstance()
+
+        propertyID = UUID.randomUUID();
+
+        binding.tvImageCount.setText("Au fost adaugate $image_count imagini")
 
         autoCompleteTextView = binding.actType
         adapterItems = ArrayAdapter<String>(requireActivity(), R.layout.list_item, tip)
@@ -85,7 +92,9 @@ class GalleryFragment : Fragment() {
                 val imageUri: Uri? = result.data?.data
                 val sd = getFileName(requireContext(), imageUri!!)
                 val uid = auth.currentUser?.uid
-                val uploadTask = storageRef.child("$uid/$sd").putFile(imageUri)
+                val uploadTask = storageRef.child("$uid/$propertyID/$sd").putFile(imageUri)
+                ++image_count
+                binding.tvImageCount.setText("Au fost adaugate $image_count imagini")
                 /*uploadTask.addOnSuccessListener {
                     // using glide library to display the image
                     storageRef.child("upload/$sd").downloadUrl.addOnSuccessListener {
