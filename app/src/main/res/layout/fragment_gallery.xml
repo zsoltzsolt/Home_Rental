@@ -187,6 +187,95 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ti_description"/>
 
+        <CheckBox
+            android:id="@+id/cb1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Parcare"
+            app:layout_constraintTop_toBottomOf="@id/btn_add_image"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+
+        <CheckBox
+            android:id="@+id/cb2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Garaj"
+            app:layout_constraintTop_toBottomOf="@id/btn_add_image"
+            app:layout_constraintLeft_toRightOf="@id/cb1"
+            />
+
+        <CheckBox
+            android:id="@+id/cb3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="Aer conditionat"
+            app:layout_constraintTop_toBottomOf="@id/btn_add_image"
+            app:layout_constraintLeft_toRightOf="@id/cb2"
+            />
+
+        <CheckBox
+            android:id="@+id/cb4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Gradina"
+            app:layout_constraintTop_toBottomOf="@id/cb1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+
+        <CheckBox
+            android:id="@+id/cb5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Balcon"
+            app:layout_constraintTop_toBottomOf="@id/cb1"
+            app:layout_constraintLeft_toRightOf="@id/cb4"
+            />
+
+        <CheckBox
+            android:id="@+id/cb6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Încălzire centrală"
+            app:layout_constraintTop_toBottomOf="@id/cb1"
+            app:layout_constraintLeft_toRightOf="@id/cb5"
+            />
+
+        <CheckBox
+            android:id="@+id/cb7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Piscina"
+            app:layout_constraintTop_toBottomOf="@id/cb4"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+
+        <CheckBox
+            android:id="@+id/cb8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Internet"
+            app:layout_constraintTop_toBottomOf="@id/cb4"
+            app:layout_constraintLeft_toRightOf="@id/cb7"
+            />
+
+        <CheckBox
+            android:id="@+id/cb9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Mobilat/Utilat"
+            app:layout_constraintTop_toBottomOf="@id/cb4"
+            app:layout_constraintLeft_toRightOf="@id/cb8"
+            />
 
         <Button
             android:layout_width="match_parent"
@@ -194,7 +283,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginHorizontal="40dp"
             android:text="@string/posteaza_anuntul"
-            app:layout_constraintTop_toBottomOf="@id/btn_add_image"
+            app:layout_constraintTop_toBottomOf="@id/cb7"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
