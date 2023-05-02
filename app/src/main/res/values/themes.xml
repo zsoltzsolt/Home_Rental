@@ -20,7 +20,7 @@
     </style>
 
     <style name="GreyButton">
-        <item name="backgroundTint">@color/grey</item>
+        <item name="backgroundTint">@color/lightGrey</item>
         <item name="android:textColor">@color/purple_500</item>
         <item name="android:enabled">false</item>
     </style>
