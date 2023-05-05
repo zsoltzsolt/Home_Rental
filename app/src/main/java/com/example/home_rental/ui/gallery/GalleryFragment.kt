@@ -17,6 +17,13 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.navigation.NavigationView
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
 import com.example.home_rental.R
 import com.example.home_rental.databinding.FragmentGalleryBinding
@@ -230,6 +237,9 @@ class GalleryFragment : Fragment() {
             databaseReference.child(user?.uid.toString()).setValue(propertyData)
 
             Toast.makeText(requireContext(), "Proprietatea a fost aduagta!", Toast.LENGTH_SHORT).show()
+
+            findNavController().navigate(R.id.nav_home)
+
         }
 
 
