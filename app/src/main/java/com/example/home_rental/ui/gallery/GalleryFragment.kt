@@ -35,6 +35,7 @@ class GalleryFragment : Fragment() {
     private var _binding: FragmentGalleryBinding? = null
     private val tip = arrayOf<String>("Garsoniera", "Apratament", "Casa", "Vila", "Birou", "Spatiu Comercial", "Spatiu industrial")
     private val judete = arrayOf("Alba", "Arad", "Arges", "Bacau", "Bihor", "Bistrita-Nasaud", "Botosani", "Braila", "Brasov", "Bucuresti", "Buzau", "Calarasi", "Caras-Severin", "Cluj", "Constanta", "Covasna", "Dambovita", "Dolj", "Galati", "Giurgiu", "Gorj", "Harghita", "Hunedoara", "Ialomita", "Iasi", "Ilfov", "Maramures", "Mehedinti", "Mures", "Neamt", "Olt", "Prahova", "Salaj", "Satu Mare", "Sibiu", "Suceava", "Teleorman", "Timis", "Tulcea", "Valcea", "Vaslui", "Vrancea")
+    private val money = arrayOf(" lei", "  €")
     private lateinit var autoCompleteTextView: AutoCompleteTextView
     private lateinit var adapterItems: ArrayAdapter<String>
     private lateinit var storageRef: StorageReference
@@ -61,8 +62,6 @@ class GalleryFragment : Fragment() {
         autoCompleteTextView.setAdapter(adapterItems)
         autoCompleteTextView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
             val selectedItem = parent.getItemAtPosition(position).toString()
-            Toast.makeText(requireContext(), "Ai selectat: $selectedItem", Toast.LENGTH_SHORT)
-                .show()
         }
 
         autoCompleteTextView = binding.actJudet
@@ -71,8 +70,14 @@ class GalleryFragment : Fragment() {
         autoCompleteTextView.setAdapter(adapterItems)
         autoCompleteTextView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
             val selectedItem = parent.getItemAtPosition(position).toString()
-            Toast.makeText(requireContext(), "Ai selectat: $selectedItem", Toast.LENGTH_SHORT)
-                .show()
+        }
+
+        autoCompleteTextView = binding.actMoney
+        adapterItems = ArrayAdapter<String>(requireActivity(), R.layout.list_item, money)
+
+        autoCompleteTextView.setAdapter(adapterItems)
+        autoCompleteTextView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+            val selectedItem = parent.getItemAtPosition(position).toString()
         }
 
         val title = RxTextView.textChanges(binding.tieTitle)
@@ -194,6 +199,16 @@ class GalleryFragment : Fragment() {
             imagePickerActivityResult.launch(galleryIntent)
         }
 
+        colorCheckBox(binding.cb1)
+        colorCheckBox(binding.cb2)
+        colorCheckBox(binding.cb3)
+        colorCheckBox(binding.cb4)
+        colorCheckBox(binding.cb5)
+        colorCheckBox(binding.cb6)
+        colorCheckBox(binding.cb7)
+        colorCheckBox(binding.cb8)
+        colorCheckBox(binding.cb9)
+
 
         return root
     }
@@ -236,6 +251,19 @@ class GalleryFragment : Fragment() {
                 }*/
             }
         }
+
+    @SuppressLint("ResourceType")
+    private fun colorCheckBox(checkBox: android.widget.CheckBox){
+        val colors = resources.getColorStateList(R.drawable.checkbox_purple_grey_selector)
+        checkBox.buttonTintList = colors
+        checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                checkBox.setTextColor(resources.getColor(R.color.purple_500))
+            } else {
+                checkBox.setTextColor(resources.getColor(R.color.grey))
+            }
+        }
+    }
 
     private fun getFileName(context: android.content.Context, uri: Uri): String? {
         if (uri.scheme == "content") {

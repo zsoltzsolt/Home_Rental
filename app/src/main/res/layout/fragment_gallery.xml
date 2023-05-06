@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background3">
+    android:background="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -17,32 +17,35 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/ti_title"
             style="@style/TextInputLayout"
-            android:layout_width="355dp"
+            android:layout_width="340dp"
             android:layout_height="55dp"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="25dp"
             android:hint="@string/titlul_anuntului"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:startIconDrawable="@drawable/baseline_title_24">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tie_title"
                 style="@style/TextInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/text_input_layout_shape_purple" />
+                android:background="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/ti_type"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
-            android:layout_width="188dp"
+            android:layout_width="340dp"
             android:layout_height="55dp"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="20dp"
             android:hint="@string/tipul_imobil"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@id/ti_title">
+            app:layout_constraintTop_toBottomOf="@id/ti_title"
+            app:startIconDrawable="@drawable/baseline_other_houses_24"
+            app:startIconTint="@color/purple_500">
 
             <AutoCompleteTextView
                 android:id="@+id/act_type"
@@ -50,39 +53,42 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none"
-                android:background="@drawable/text_input_layout_shape_purple" />
+                android:background="@color/white"/>
             </com.google.android.material.textfield.TextInputLayout>
 
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/ti_year"
             style="@style/TextInputLayout"
-            android:layout_width="155dp"
+            android:layout_width="340dp"
             android:layout_height="55dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
             android:hint="@string/an_constructie"
-            app:layout_constraintLeft_toRightOf="@id/ti_type"
-            app:layout_constraintTop_toTopOf="@id/ti_title">
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ti_type"
+            app:startIconDrawable="@drawable/baseline_calendar_month_24">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tie_year"
                 style="@style/TextInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/text_input_layout_shape_purple" />
+                android:background="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/ti_judet"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
-            android:layout_width="188dp"
+            android:layout_width="340dp"
             android:layout_height="55dp"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="20dp"
             android:hint="@string/judet"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@id/ti_type">
+            app:layout_constraintTop_toBottomOf="@id/ti_year"
+            app:startIconDrawable="@drawable/baseline_map_24"
+            app:startIconTint="@color/purple_500">
 
             <AutoCompleteTextView
                 android:id="@+id/act_judet"
@@ -90,117 +96,127 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none"
-                android:background="@drawable/text_input_layout_shape_purple" />
+                android:background="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/ti_city"
             style="@style/TextInputLayout"
-            android:layout_width="155dp"
+            android:layout_width="340dp"
             android:layout_height="55dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
             android:hint="@string/oras"
-            app:layout_constraintLeft_toRightOf="@id/ti_judet"
-            app:layout_constraintTop_toTopOf="@id/ti_year"
-            app:endIconDrawable="@drawable/baseline_location_city_24"
-            app:endIconMode="custom"
-            app:endIconTint="@color/purple_500">
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ti_judet"
+            app:startIconDrawable="@drawable/baseline_location_city_24">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tie_city"
                 style="@style/TextInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/text_input_layout_shape_purple" />
+                android:background="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/ti_surface"
             style="@style/TextInputLayout"
-            android:layout_width="188dp"
+            android:layout_width="340dp"
             android:layout_height="55dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
             android:hint="@string/suprafata"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@id/ti_judet"
-            app:endIconMode="custom"
-            app:endIconDrawable="@drawable/meter"
-            app:endIconTint="@color/purple_500">
+            app:layout_constraintTop_toBottomOf="@id/ti_city"
+            app:startIconDrawable="@drawable/meter">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tie_surface"
                 style="@style/TextInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/text_input_layout_shape_purple" />
+                android:background="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/ti_price"
             style="@style/TextInputLayout"
-            android:layout_width="155dp"
+            android:layout_width="200dp"
             android:layout_height="55dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
             android:hint="@string/pret"
-            app:layout_constraintLeft_toRightOf="@id/ti_surface"
-            app:layout_constraintTop_toTopOf="@id/ti_city"
-            app:endIconMode="custom"
-            app:endIconDrawable="@drawable/outline_euro_symbol_24"
-            app:endIconTint="@color/purple_500">
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ti_surface"
+            app:startIconDrawable="@drawable/baseline_paid_24">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tie_price"
                 style="@style/TextInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/text_input_layout_shape_purple" />
+                android:background="@color/white" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ti_money"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="120dp"
+            android:layout_height="55dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintLeft_toRightOf="@id/ti_price"
+            app:layout_constraintTop_toBottomOf="@id/ti_surface">
+
+            <AutoCompleteTextView
+                android:id="@+id/act_money"
+                style="@style/TextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:text="lei"
+                android:background="@color/white"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/ti_rooms"
             style="@style/TextInputLayout"
-            android:layout_width="188dp"
+            android:layout_width="340dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:hint="@string/numar_camere"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ti_surface"
-            app:endIconMode="custom"
-            app:endIconDrawable="@drawable/outline_chair_24"
-            app:endIconTint="@color/purple_500">
+            app:layout_constraintTop_toBottomOf="@id/ti_price"
+            app:startIconDrawable="@drawable/outline_chair_24">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tie_rooms"
                 style="@style/TextInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/text_input_layout_shape_purple" />
+                android:background="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/ti_bath"
             style="@style/TextInputLayout"
-            android:layout_width="155dp"
+            android:layout_width="340dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
             android:hint="Numar bai"
-            app:layout_constraintLeft_toRightOf="@id/ti_rooms"
-            app:layout_constraintTop_toBottomOf="@id/ti_surface"
-            app:endIconDrawable="@drawable/outline_shower_24"
-            app:endIconMode="custom"
-            app:endIconTint="@color/purple_500">
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ti_rooms"
+            app:startIconDrawable="@drawable/outline_shower_24" >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tie_bath"
                 style="@style/TextInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/text_input_layout_shape_purple" />
+                android:background="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageButton
@@ -208,12 +224,12 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginLeft="140dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:background="@color/white"
             android:src="@drawable/baseline_image_24"
             android:contentDescription="@string/adauga_poza"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ti_rooms"/>
+            app:layout_constraintTop_toBottomOf="@id/ti_bath"/>
 
         <TextView
             android:id="@+id/tv_image_count"
@@ -223,7 +239,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="110dp"
             android:text="Au fost adaugate 0 imagini"
-            android:textColor="@color/white"
+            android:textColor="@color/grey"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_add_image"
             />
@@ -232,9 +248,10 @@
             android:id="@+id/cb1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"
             android:text="Parcare"
-            android:textColor="@color/white"
+            android:textColor="@color/grey"
             app:layout_constraintTop_toBottomOf="@id/tv_image_count"
             app:layout_constraintLeft_toLeftOf="parent"
             />
@@ -243,9 +260,10 @@
             android:id="@+id/cb2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"
             android:text="Garaj"
-            android:textColor="@color/white"
+            android:textColor="@color/grey"
             app:layout_constraintTop_toBottomOf="@id/tv_image_count"
             app:layout_constraintLeft_toRightOf="@id/cb1"
             />
@@ -255,8 +273,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
             android:text="Aer conditionat"
-            android:textColor="@color/white"
+            android:textColor="@color/grey"
             app:layout_constraintTop_toBottomOf="@id/tv_image_count"
             app:layout_constraintLeft_toRightOf="@id/cb2"
             />
@@ -267,7 +286,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="Gradina"
-            android:textColor="@color/white"
+            android:textColor="@color/grey"
             app:layout_constraintTop_toBottomOf="@id/cb1"
             app:layout_constraintLeft_toLeftOf="parent"
             />
@@ -278,7 +297,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="Balcon"
-            android:textColor="@color/white"
+            android:textColor="@color/grey"
             app:layout_constraintTop_toBottomOf="@id/cb1"
             app:layout_constraintLeft_toRightOf="@id/cb4"
             />
@@ -289,7 +308,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="Încălzire centrală"
-            android:textColor="@color/white"
+            android:textColor="@color/grey"
             app:layout_constraintTop_toBottomOf="@id/cb1"
             app:layout_constraintLeft_toRightOf="@id/cb5"
             />
@@ -300,7 +319,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="Piscina"
-            android:textColor="@color/white"
+            android:textColor="@color/grey"
             app:layout_constraintTop_toBottomOf="@id/cb4"
             app:layout_constraintLeft_toLeftOf="parent"
             />
@@ -311,7 +330,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="Internet"
-            android:textColor="@color/white"
+            android:textColor="@color/grey"
             app:layout_constraintTop_toBottomOf="@id/cb4"
             app:layout_constraintLeft_toRightOf="@id/cb7"
             />
@@ -322,7 +341,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="Mobilat/Utilat"
-            android:textColor="@color/white"
+            android:textColor="@color/grey"
             app:layout_constraintTop_toBottomOf="@id/cb4"
             app:layout_constraintLeft_toRightOf="@id/cb8"
             />
@@ -344,7 +363,7 @@
                 style="@style/TextInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/text_input_layout_shape_purple" />
+                android:background="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -364,7 +383,7 @@
                 style="@style/TextInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/text_input_layout_shape_purple" />
+                android:background="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -376,7 +395,7 @@
             android:text="@string/posteaza_anuntul"
             app:layout_constraintTop_toBottomOf="@id/ti_phone"
             style="@style/GreyButton"
-            android:layout_marginBottom="50dp"/>
+            android:textColor="@color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
