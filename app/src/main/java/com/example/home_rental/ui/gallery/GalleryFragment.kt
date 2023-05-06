@@ -17,10 +17,20 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.navigation.NavigationView
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
 import com.example.home_rental.R
 import com.example.home_rental.databinding.FragmentGalleryBinding
+import com.example.home_rental.ui.home.HomeFragment
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.core.Context
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
@@ -42,6 +52,7 @@ class GalleryFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private var image_count = 0
     private lateinit var propertyID: UUID
+    private lateinit var databaseReference: DatabaseReference
 
     private val binding get() = _binding!!
 
@@ -53,6 +64,8 @@ class GalleryFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
 
         propertyID = UUID.randomUUID()
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("properties")
 
         binding.tvImageCount.setText("Au fost adaugate $image_count imagini")
 
@@ -199,6 +212,7 @@ class GalleryFragment : Fragment() {
             imagePickerActivityResult.launch(galleryIntent)
         }
 
+
         colorCheckBox(binding.cb1)
         colorCheckBox(binding.cb2)
         colorCheckBox(binding.cb3)
@@ -208,6 +222,41 @@ class GalleryFragment : Fragment() {
         colorCheckBox(binding.cb7)
         colorCheckBox(binding.cb8)
         colorCheckBox(binding.cb9)
+
+        binding.btnPost.setOnClickListener {
+            val title = binding.tieTitle.text.toString().trim()
+            val type = binding.actType.text.toString().trim()
+            val year = binding.tieYear.text.toString().toInt()
+            val judet = binding.actJudet.text.toString().trim()
+            val city = binding.tieCity.text.toString().trim()
+            val surface = binding.tieSurface.text.toString().toInt()
+            val price = binding.tiePrice.text.toString().toDouble()
+            val rooms = binding.tieRooms.text.toString().toInt()
+            val bath = binding.tieBath.text.toString().toInt()
+            var parking = binding.cb1.isChecked
+            var garage = binding.cb2.isChecked
+            var airConditioner = binding.cb3.isChecked
+            var garden = binding.cb4.isChecked
+            var balcon = binding.cb5.isChecked
+            var centrala = binding.cb6.isChecked
+            var pool = binding.cb7.isChecked
+            var internet = binding.cb8.isChecked
+            var mobilat = binding.cb9.isChecked
+            var description1 = binding.tieDescription.toString().trim()
+            var phone = binding.tiePhone.text.toString().trim()
+
+            val user = auth.currentUser
+
+            val propertyData = com.example.home_rental.Properties(title, type, year, judet, city, surface, price,
+                rooms, bath, parking, garage, airConditioner, garden, balcon, centrala, pool, internet, mobilat, description1, phone)
+
+            databaseReference.child(user?.uid.toString()).setValue(propertyData)
+
+            Toast.makeText(requireContext(), "Proprietatea a fost aduagta!", Toast.LENGTH_SHORT).show()
+
+            findNavController().navigate(R.id.nav_home)
+
+        }
 
 
         return root
