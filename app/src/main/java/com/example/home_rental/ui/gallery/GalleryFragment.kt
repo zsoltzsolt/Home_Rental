@@ -28,6 +28,7 @@ import com.bumptech.glide.Glide
 import com.example.home_rental.R
 import com.example.home_rental.databinding.FragmentGalleryBinding
 import com.example.home_rental.ui.home.HomeFragment
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -98,6 +99,9 @@ class GalleryFragment : Fragment() {
             .map { title ->
                 title.isEmpty()
             }
+        title.subscribe {
+            showFieldMandatory(it, binding.tieTitle)
+        }
 
         val type = RxTextView.textChanges(binding.actType)
             .skipInitialValue()
@@ -119,34 +123,49 @@ class GalleryFragment : Fragment() {
                 city ->
                 city.isEmpty()
             }
+        city.subscribe{
+            showFieldMandatory(it, binding.tieCity)
+        }
 
         val surface = RxTextView.textChanges(binding.tieSurface)
             .skipInitialValue()
             .map {
                 surface ->
-                surface.isEmpty()
+                !surface.matches(Regex("^[1-9]\\d*\$"))
             }
+        surface.subscribe{
+            showInvalidNumber(it, binding.tieSurface)
+        }
 
         val price = RxTextView.textChanges(binding.tiePrice)
             .skipInitialValue()
             .map {
                 price ->
-                price.isEmpty()
+                !price.matches(Regex("^(?!0\\d)\\d+(\\.\\d{1,2})?\$"))
             }
+        price.subscribe {
+            showInvalidPrice(it)
+        }
 
         val rooms = RxTextView.textChanges(binding.tieRooms)
             .skipInitialValue()
             .map {
                 rooms ->
-                rooms.isEmpty()
+                !rooms.matches(Regex("^[1-9]\\d*\$"))
             }
+        rooms.subscribe {
+            showInvalidNumber(it, binding.tiePrice)
+        }
 
         val bath = RxTextView.textChanges(binding.tieBath)
             .skipInitialValue()
             .map{
                 bath ->
-                bath.isEmpty()
+                !bath.matches(Regex("^[1-9]\\d*\$"))
             }
+        bath.subscribe {
+            showInvalidNumber(it, binding.tieBath)
+        }
 
         val description = RxTextView.textChanges(binding.tieDescription)
             .skipInitialValue()
@@ -154,11 +173,14 @@ class GalleryFragment : Fragment() {
                 description ->
                 description.isEmpty()
             }
+        description.subscribe {
+            showFieldMandatory(it, binding.tieDescription)
+        }
 
         val year = RxTextView.textChanges(binding.tieYear)
             .skipInitialValue()
             .map { year ->
-                year.toString().toInt() < 1800 || year.toString().toInt() > Calendar.getInstance().get(Calendar.YEAR)
+                !year.matches(Regex("^(19|20)\\d{2}\$"))
             }
         year.subscribe {
             showDateIsNotValid(it)
@@ -197,7 +219,7 @@ class GalleryFragment : Fragment() {
         invalidFields.subscribe { isValid: Boolean ->
             if (isValid) {
                 binding.btnPost.isEnabled = true
-                binding.btnPost.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.white)
+                binding.btnPost.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.purple_500)
             }else{
                 binding.btnPost.isEnabled = false
                 binding.btnPost.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.grey)
@@ -265,6 +287,18 @@ class GalleryFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun showFieldMandatory(isNotValid : Boolean, textInputEditText: TextInputEditText){
+        textInputEditText.error = if(isNotValid) "Camp obligatoriu" else null
+    }
+
+    private fun showInvalidNumber(isNotValid : Boolean, textInputEditText: TextInputEditText){
+        textInputEditText.error = if(isNotValid) "Numar invalid" else null
+    }
+
+    private fun showInvalidPrice(isNotValid : Boolean){
+        binding.tiePrice.error = if(isNotValid) "Pret invalid" else null
     }
 
     private fun showDateIsNotValid(isNotValid : Boolean){
