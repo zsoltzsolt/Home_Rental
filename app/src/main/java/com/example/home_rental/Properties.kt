@@ -8,6 +8,7 @@ data class Properties(
     var city: String,
     var surface: Int,
     var price: Double,
+    var money: String,
     var rooms: Int,
     var bath: Int,
     var parking: Boolean,

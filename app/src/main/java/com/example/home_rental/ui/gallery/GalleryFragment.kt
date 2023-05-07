@@ -66,7 +66,7 @@ class GalleryFragment : Fragment() {
 
         propertyID = UUID.randomUUID()
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("properties")
+        databaseReference = FirebaseDatabase.getInstance().getReference("properties").child(auth.uid.toString())
 
         binding.tvImageCount.setText("Au fost adaugate $image_count imagini")
 
@@ -253,6 +253,7 @@ class GalleryFragment : Fragment() {
             val city = binding.tieCity.text.toString().trim()
             val surface = binding.tieSurface.text.toString().toInt()
             val price = binding.tiePrice.text.toString().toDouble()
+            val money = binding.actMoney.text.toString().trim()
             val rooms = binding.tieRooms.text.toString().toInt()
             val bath = binding.tieBath.text.toString().toInt()
             var parking = binding.cb1.isChecked
@@ -264,15 +265,16 @@ class GalleryFragment : Fragment() {
             var pool = binding.cb7.isChecked
             var internet = binding.cb8.isChecked
             var mobilat = binding.cb9.isChecked
-            var description1 = binding.tieDescription.toString().trim()
+            val editable = binding.tieDescription.text
+            val description1 = editable?.toString()
             var phone = binding.tiePhone.text.toString().trim()
 
             val user = auth.currentUser
 
-            val propertyData = com.example.home_rental.Properties(title, type, year, judet, city, surface, price,
-                rooms, bath, parking, garage, airConditioner, garden, balcon, centrala, pool, internet, mobilat, description1, phone)
+            val propertyData = com.example.home_rental.Properties(title, type, year, judet, city, surface, price,money,
+                rooms, bath, parking, garage, airConditioner, garden, balcon, centrala, pool, internet, mobilat, description1!!, phone)
 
-            databaseReference.child(user?.uid.toString()).setValue(propertyData)
+            databaseReference.child(propertyID.toString()).setValue(propertyData)
 
             Toast.makeText(requireContext(), "Proprietatea a fost aduagta!", Toast.LENGTH_SHORT).show()
 
