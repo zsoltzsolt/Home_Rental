@@ -3,7 +3,7 @@
     <string name="linia1">Alatura-te comunitatii noastre!</string>
     <string name="linia2"><b>Autentificare</b> daca ai deja un cont.</string>
     <string name="linia3"><b>Inregistrare</b> daca nu ai inca un cont.</string>
-    <string name="title_activity_main2">MainActivity2</string>
+    <string name="title_activity_main2">OwnerMainActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Home-Rental</string>
@@ -11,7 +11,21 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Setari</string>
 
+    <string name="AdaugaAnunt"><u>Adauga anunt</u></string>
+
     <string name="menu_home">Pagina principala</string>
     <string name="menu_gallery">Adauga anunt</string>
     <string name="menu_slideshow">Anunturile mele</string>
+    <string name="posteaza_anuntul">Posteaza Anuntul</string>
+    <string name="adauga_poza">Adauga poza</string>
+    <string name="descriere">Descriere</string>
+    <string name="pret">Pret</string>
+    <string name="suprafata">Suprafata</string>
+    <string name="oras">Oras</string>
+    <string name="judet">Judet</string>
+    <string name="an_constructie">An constructie</string>
+    <string name="tipul_imobil">Tipul imobil</string>
+    <string name="titlul_anuntului">Titlul anuntului</string>
+    <string name="numar_camere">Numar camere</string>
+    <string name="telefon">Telefon</string>
 </resources>

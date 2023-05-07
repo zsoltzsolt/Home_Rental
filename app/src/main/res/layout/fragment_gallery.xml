@@ -1,22 +1,407 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.gallery.GalleryFragment">
+    android:background="@color/white">
 
-    <TextView
-        android:id="@+id/text_gallery"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        tools:context=".ui.gallery.GalleryFragment"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ti_title"
+            style="@style/TextInputLayout"
+            android:layout_width="340dp"
+            android:layout_height="55dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="25dp"
+            android:hint="@string/titlul_anuntului"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:startIconDrawable="@drawable/baseline_title_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tie_title"
+                style="@style/TextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ti_type"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="340dp"
+            android:layout_height="55dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:hint="@string/tipul_imobil"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ti_title"
+            app:startIconDrawable="@drawable/baseline_other_houses_24"
+            app:startIconTint="@color/purple_500">
+
+            <AutoCompleteTextView
+                android:id="@+id/act_type"
+                style="@style/TextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:background="@color/white"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ti_year"
+            style="@style/TextInputLayout"
+            android:layout_width="340dp"
+            android:layout_height="55dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:hint="@string/an_constructie"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ti_type"
+            app:startIconDrawable="@drawable/baseline_calendar_month_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tie_year"
+                style="@style/TextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ti_judet"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="340dp"
+            android:layout_height="55dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:hint="@string/judet"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ti_year"
+            app:startIconDrawable="@drawable/baseline_map_24"
+            app:startIconTint="@color/purple_500">
+
+            <AutoCompleteTextView
+                android:id="@+id/act_judet"
+                style="@style/TextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:background="@color/white" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ti_city"
+            style="@style/TextInputLayout"
+            android:layout_width="340dp"
+            android:layout_height="55dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:hint="@string/oras"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ti_judet"
+            app:startIconDrawable="@drawable/baseline_location_city_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tie_city"
+                style="@style/TextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ti_surface"
+            style="@style/TextInputLayout"
+            android:layout_width="340dp"
+            android:layout_height="55dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:hint="@string/suprafata"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ti_city"
+            app:startIconDrawable="@drawable/meter">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tie_surface"
+                style="@style/TextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ti_price"
+            style="@style/TextInputLayout"
+            android:layout_width="200dp"
+            android:layout_height="55dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:hint="@string/pret"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ti_surface"
+            app:startIconDrawable="@drawable/baseline_paid_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tie_price"
+                style="@style/TextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ti_money"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="120dp"
+            android:layout_height="55dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintLeft_toRightOf="@id/ti_price"
+            app:layout_constraintTop_toBottomOf="@id/ti_surface">
+
+            <AutoCompleteTextView
+                android:id="@+id/act_money"
+                style="@style/TextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:text="lei"
+                android:background="@color/white"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ti_rooms"
+            style="@style/TextInputLayout"
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:hint="@string/numar_camere"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ti_price"
+            app:startIconDrawable="@drawable/outline_chair_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tie_rooms"
+                style="@style/TextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ti_bath"
+            style="@style/TextInputLayout"
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:hint="Numar bai"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ti_rooms"
+            app:startIconDrawable="@drawable/outline_shower_24" >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tie_bath"
+                style="@style/TextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageButton
+            android:id="@+id/btn_add_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="140dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/white"
+            android:src="@drawable/baseline_image_24"
+            android:contentDescription="@string/adauga_poza"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ti_bath"/>
+
+        <TextView
+            android:id="@+id/tv_image_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="110dp"
+            android:text="Au fost adaugate 0 imagini"
+            android:textColor="@color/grey"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_add_image"
+            />
+
+        <CheckBox
+            android:id="@+id/cb1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="Parcare"
+            android:textColor="@color/grey"
+            app:layout_constraintTop_toBottomOf="@id/tv_image_count"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+
+        <CheckBox
+            android:id="@+id/cb2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="Garaj"
+            android:textColor="@color/grey"
+            app:layout_constraintTop_toBottomOf="@id/tv_image_count"
+            app:layout_constraintLeft_toRightOf="@id/cb1"
+            />
+
+        <CheckBox
+            android:id="@+id/cb3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:text="Aer conditionat"
+            android:textColor="@color/grey"
+            app:layout_constraintTop_toBottomOf="@id/tv_image_count"
+            app:layout_constraintLeft_toRightOf="@id/cb2"
+            />
+
+        <CheckBox
+            android:id="@+id/cb4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Gradina"
+            android:textColor="@color/grey"
+            app:layout_constraintTop_toBottomOf="@id/cb1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+
+        <CheckBox
+            android:id="@+id/cb5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Balcon"
+            android:textColor="@color/grey"
+            app:layout_constraintTop_toBottomOf="@id/cb1"
+            app:layout_constraintLeft_toRightOf="@id/cb4"
+            />
+
+        <CheckBox
+            android:id="@+id/cb6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Încălzire centrală"
+            android:textColor="@color/grey"
+            app:layout_constraintTop_toBottomOf="@id/cb1"
+            app:layout_constraintLeft_toRightOf="@id/cb5"
+            />
+
+        <CheckBox
+            android:id="@+id/cb7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Piscina"
+            android:textColor="@color/grey"
+            app:layout_constraintTop_toBottomOf="@id/cb4"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+
+        <CheckBox
+            android:id="@+id/cb8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Internet"
+            android:textColor="@color/grey"
+            app:layout_constraintTop_toBottomOf="@id/cb4"
+            app:layout_constraintLeft_toRightOf="@id/cb7"
+            />
+
+        <CheckBox
+            android:id="@+id/cb9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Mobilat/Utilat"
+            android:textColor="@color/grey"
+            app:layout_constraintTop_toBottomOf="@id/cb4"
+            app:layout_constraintLeft_toRightOf="@id/cb8"
+            />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ti_description"
+            style="@style/TextInputLayout"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:maxHeight="200dp"
+            android:layout_marginHorizontal="20dp"
+            app:startIconDrawable="@drawable/outline_description_24"
+            android:layout_marginTop="10dp"
+            android:hint="@string/descriere"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cb7">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tie_description"
+                style="@style/TextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ti_phone"
+            style="@style/TextInputLayout"
+            android:layout_width="350dp"
+            android:layout_height="55dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:hint="@string/telefon"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ti_description"
+            app:startIconDrawable="@drawable/baseline_call_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tie_phone"
+                style="@style/TextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btn_post"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="40dp"
+            android:text="@string/posteaza_anuntul"
+            app:layout_constraintTop_toBottomOf="@id/ti_phone"
+            style="@style/GreyButton"
+            android:textColor="@color/white" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
