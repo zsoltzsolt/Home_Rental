@@ -21,8 +21,9 @@ class PropertyAdapter(private val propertiesList : ArrayList<Properties>) : Recy
 
         val property: Properties = propertiesList[position]
         holder.title.text = property.title
-        holder.price.text = "Pret: " + property.price
+        holder.price.text = "Pret: " + property.price + " " + property.money + "/luna"
         holder.location.text = property.city + "," + property.judet
+        holder.phone.text = "Telefon: " + property.phone
 
     }
 
@@ -34,6 +35,7 @@ class PropertyAdapter(private val propertiesList : ArrayList<Properties>) : Recy
         val title : TextView = itemView.findViewById(R.id.anouncement_title)
         val price : TextView = itemView.findViewById(R.id.anouncement_price)
         val location: TextView = itemView.findViewById(R.id.anouncement_location)
+        val phone : TextView = itemView.findViewById(R.id.anouncement_phone)
     }
 
 }

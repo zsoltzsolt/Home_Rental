@@ -44,7 +44,7 @@ import java.util.*
 class GalleryFragment : Fragment() {
 
     private var _binding: FragmentGalleryBinding? = null
-    private val tip = arrayOf<String>("Garsoniera", "Apratament", "Casa", "Vila", "Birou", "Spatiu Comercial", "Spatiu industrial")
+    private val tip = arrayOf("Garsoniera", "Apratament", "Casa", "Vila", "Birou", "Spatiu Comercial", "Spatiu industrial")
     private val judete = arrayOf("Alba", "Arad", "Arges", "Bacau", "Bihor", "Bistrita-Nasaud", "Botosani", "Braila", "Brasov", "Bucuresti", "Buzau", "Calarasi", "Caras-Severin", "Cluj", "Constanta", "Covasna", "Dambovita", "Dolj", "Galati", "Giurgiu", "Gorj", "Harghita", "Hunedoara", "Ialomita", "Iasi", "Ilfov", "Maramures", "Mehedinti", "Mures", "Neamt", "Olt", "Prahova", "Salaj", "Satu Mare", "Sibiu", "Suceava", "Teleorman", "Timis", "Tulcea", "Valcea", "Vaslui", "Vrancea")
     private val money = arrayOf(" lei", "  €")
     private lateinit var autoCompleteTextView: AutoCompleteTextView
@@ -71,7 +71,7 @@ class GalleryFragment : Fragment() {
         binding.tvImageCount.setText("Au fost adaugate $image_count imagini")
 
         autoCompleteTextView = binding.actType
-        adapterItems = ArrayAdapter<String>(requireActivity(), R.layout.list_item, tip)
+        adapterItems = ArrayAdapter<String>(requireActivity(), R.layout.list_item1, tip)
 
         autoCompleteTextView.setAdapter(adapterItems)
         autoCompleteTextView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
@@ -79,7 +79,7 @@ class GalleryFragment : Fragment() {
         }
 
         autoCompleteTextView = binding.actJudet
-        adapterItems = ArrayAdapter<String>(requireActivity(), R.layout.list_item, judete)
+        adapterItems = ArrayAdapter<String>(requireActivity(), R.layout.list_item1, judete)
 
         autoCompleteTextView.setAdapter(adapterItems)
         autoCompleteTextView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
@@ -87,7 +87,7 @@ class GalleryFragment : Fragment() {
         }
 
         autoCompleteTextView = binding.actMoney
-        adapterItems = ArrayAdapter<String>(requireActivity(), R.layout.list_item, money)
+        adapterItems = ArrayAdapter<String>(requireActivity(), R.layout.list_item1, money)
 
         autoCompleteTextView.setAdapter(adapterItems)
         autoCompleteTextView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
