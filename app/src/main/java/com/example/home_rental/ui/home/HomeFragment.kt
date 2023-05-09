@@ -35,7 +35,17 @@ class HomeFragment : Fragment() {
         db = FirebaseDatabase.getInstance().getReference("properties")
 
 
+        recyclerView = binding.recycleView
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.setHasFixedSize(true)
 
+        propertiesArrayList = arrayListOf()
+
+        propertyAdapter = PropertyAdapter(propertiesArrayList)
+
+        recyclerView.adapter = propertyAdapter
+
+        EventChangeListener()
 
         return root
     }
