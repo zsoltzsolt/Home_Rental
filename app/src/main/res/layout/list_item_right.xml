@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp"
+    android:layout_marginVertical="20dp"
+    android:layout_marginHorizontal="20dp"
+    android:ellipsize="end"
+    android:maxLines="1"
+    android:textAppearance="?attr/textAppearanceSubtitle1"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="5dp"
+    app:cardUseCompatPadding="true"
+    app:cardBackgroundColor="@color/white"
+    app:cardPreventCornerOverlap="false">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="190dp"
+            android:layout_height="match_parent"
+            app:layout_constraintLeft_toRightOf="@id/image1"
+            android:orientation="vertical"
+            android:gravity="left"
+            >
+
+            <TextView
+                android:id="@+id/anouncement_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/purple_500"
+                android:text="Apartament nou"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/anouncement_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pret: 200 lei/luna"
+                android:textSize="14sp"
+                android:layout_gravity="left"
+                android:layout_marginTop="15dp"
+                android:layout_marginHorizontal="10dp"
+                android:textColor="@color/DarkGrey"
+                />
+            <TextView
+                android:id="@+id/anouncement_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Telefon:"
+                android:textSize="14sp"
+                android:layout_gravity="left"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/DarkGrey"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="left|bottom"
+                android:layout_marginLeft="10dp"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/baseline_place_24"
+                    app:tint="@color/purple_500"
+                    android:layout_marginTop="21dp"
+                    />
+                <TextView
+                    android:id="@+id/anouncement_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lugoj, Timis"
+                    android:textSize="13sp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    />
+
+            </LinearLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image1"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/property1"
+            android:scaleType="centerCrop"
+            />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

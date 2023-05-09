@@ -12,8 +12,8 @@ class PropertyAdapter(private val propertiesList : ArrayList<Properties>) : Recy
         parent: ViewGroup,
         viewType: Int
     ): PropertyAdapter.MyViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
-
+        val layoutId = if (viewType == 0) R.layout.list_item else R.layout.list_item_right
+        val itemView = LayoutInflater.from(parent.context).inflate(layoutId, parent, false)
         return MyViewHolder(itemView)
     }
 
@@ -25,6 +25,11 @@ class PropertyAdapter(private val propertiesList : ArrayList<Properties>) : Recy
         holder.location.text = property.city + "," + property.judet
         holder.phone.text = "Telefon: " + property.phone
 
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        // Returnează 0 pentru pozițiile pare și 1 pentru pozițiile impare
+        return position % 2
     }
 
     override fun getItemCount(): Int {
