@@ -3,16 +3,21 @@ package com.example.home_rental.ui.home
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.home_rental.Properties
 import com.example.home_rental.PropertyAdapter
+import com.example.home_rental.R
 import com.example.home_rental.User
 import com.example.home_rental.databinding.FragmentHomeBinding
+import com.example.home_rental.ui.details.DetailsFragment
 import com.google.firebase.database.*
 
 class HomeFragment : Fragment() {
@@ -32,6 +37,15 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        val onClickListener = OnClickListener { view ->
+            val position = view.tag as Int
+            val property = propertiesArrayList[position]
+            val newFragment = DetailsFragment()
+
+            findNavController().navigate(R.id.detailsFragment)
+
+        }
+
         db = FirebaseDatabase.getInstance().getReference("properties")
 
 
@@ -41,7 +55,7 @@ class HomeFragment : Fragment() {
 
         propertiesArrayList = arrayListOf()
 
-        propertyAdapter = PropertyAdapter(propertiesArrayList)
+        propertyAdapter = PropertyAdapter(propertiesArrayList, onClickListener)
 
         recyclerView.adapter = propertyAdapter
 
@@ -49,6 +63,7 @@ class HomeFragment : Fragment() {
 
         return root
     }
+
 
     private fun EventChangeListener() {
         db.addValueEventListener(object : ValueEventListener {
@@ -86,7 +101,7 @@ class HomeFragment : Fragment() {
                         // Crează un obiect Properties cu valorile extrase
                         val property = Properties(title!!, type!!, year!!, judet!!, city!!, surface!!, price!!, money!!,
                             rooms!!, bath!!, parking!!, garage!!, airConditioner!!, garden!!, balcon!!, centrala!!, pool!!,
-                            internet!!, mobilat!!, description!!, phone!!)
+                            internet!!, mobilat!!, description!!, phone!!, null)
 
                         propertiesArrayList.add(property)
                     }

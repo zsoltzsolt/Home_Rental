@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -13,7 +14,8 @@
     app:cardElevation="5dp"
     app:cardUseCompatPadding="true"
     app:cardBackgroundColor="@color/white"
-    app:cardPreventCornerOverlap="false">
+    app:cardPreventCornerOverlap="false"
+    android:onClick="goToDetails">
 
 
     <LinearLayout
@@ -34,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="17dp"
                 android:textColor="@color/purple_500"
                 android:text="Apartament nou"
                 android:textSize="18sp"
@@ -59,7 +61,7 @@
                 android:textSize="14sp"
                 android:layout_gravity="left"
                 android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="17dp"
                 android:textColor="@color/DarkGrey"
                 />
             <LinearLayout
@@ -74,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/baseline_place_24"
                     app:tint="@color/purple_500"
-                    android:layout_marginTop="21dp"
+                    android:layout_marginTop="17dp"
                     />
                 <TextView
                     android:id="@+id/anouncement_location"
@@ -82,8 +84,8 @@
                     android:layout_height="wrap_content"
                     android:text="Lugoj, Timis"
                     android:textSize="13sp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="17dp"
                     />
 
             </LinearLayout>

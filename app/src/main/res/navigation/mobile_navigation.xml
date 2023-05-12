@@ -22,4 +22,8 @@
         android:name="com.example.home_rental.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.home_rental.ui.details.DetailsFragment"
+        android:label="DetailsFragment" />
 </navigation>

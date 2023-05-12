@@ -272,7 +272,7 @@ class GalleryFragment : Fragment() {
             val user = auth.currentUser
 
             val propertyData = com.example.home_rental.Properties(title, type, year, judet, city, surface, price,money,
-                rooms, bath, parking, garage, airConditioner, garden, balcon, centrala, pool, internet, mobilat, description1!!, phone)
+                rooms, bath, parking, garage, airConditioner, garden, balcon, centrala, pool, internet, mobilat, description1!!, phone, null)
 
             databaseReference.child(propertyID.toString()).setValue(propertyData)
 

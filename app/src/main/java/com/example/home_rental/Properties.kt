@@ -1,5 +1,7 @@
 package com.example.home_rental
 
+import com.google.firebase.storage.StorageReference
+
 data class Properties(
     var title: String,
     var type: String,
@@ -21,5 +23,6 @@ data class Properties(
     var internet: Boolean,
     var mobilat: Boolean,
     var description: String,
-    var phone: String
+    var phone: String,
+    var image: StorageReference?
 )
