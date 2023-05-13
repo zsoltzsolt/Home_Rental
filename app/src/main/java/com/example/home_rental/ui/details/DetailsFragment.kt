@@ -47,7 +47,9 @@ class DetailsFragment : Fragment() {
                 binding.tvDate.text = property.date
                 imageList = property.image?.toList() ?: emptyList()
 
-
+                val adapter = ImageSliderAdapter(imageList)
+                viewPager.adapter = adapter
+                TabLayoutMediator(tabLayout, viewPager) { _, _ -> }.attach()
             }
         }
 
