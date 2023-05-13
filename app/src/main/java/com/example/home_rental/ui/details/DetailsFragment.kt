@@ -36,7 +36,20 @@ class DetailsFragment : Fragment() {
         _binding = FragmentDetailsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        viewPager = binding.viewPager
+        tabLayout = binding.tabLayout
 
+        val bundle = arguments
+        if (bundle != null) {
+            val property = bundle.getParcelable<Parcelable>("key")
+            if (property != null) {
+                val prop = property as com.example.home_rental.Properties
+                binding.tvDate.text = property.date
+                imageList = property.image?.toList() ?: emptyList()
+
+
+            }
+        }
 
         return root
     }

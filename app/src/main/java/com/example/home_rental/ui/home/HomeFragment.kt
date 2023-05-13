@@ -53,8 +53,12 @@ class HomeFragment : Fragment() {
             val property = propertiesArrayList[position]
             val newFragment = DetailsFragment()
 
+            val bundle = Bundle()
+            bundle.putParcelable("key", property)
 
-            findNavController().navigate(R.id.detailsFragment)
+            newFragment.arguments = bundle
+
+            findNavController().navigate(R.id.detailsFragment, bundle)
 
         }
 
