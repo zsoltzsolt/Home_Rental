@@ -1,8 +1,13 @@
 package com.example.home_rental
 
-import com.google.firebase.storage.StorageReference
+import android.os.Parcelable
+import android.os.Parcel
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.TypeParceler
 
+@Parcelize
 data class Properties(
+    var id: String,
     var title: String,
     var type: String,
     var year: Int,
@@ -24,6 +29,9 @@ data class Properties(
     var mobilat: Boolean,
     var description: String,
     var phone: String,
-    var image: ArrayList<String>?,
-    var firstImage: String
-)
+    var image: Array<String>?,
+    var firstImage: String,
+    var date: String
+) : Parcelable
+
+

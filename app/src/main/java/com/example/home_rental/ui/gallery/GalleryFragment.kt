@@ -39,6 +39,7 @@ import com.google.firebase.storage.ktx.storage
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.Observable
 import kotlinx.coroutines.NonDisposableHandle.parent
+import java.time.LocalDate
 import java.util.*
 
 class GalleryFragment : Fragment() {
@@ -274,8 +275,8 @@ class GalleryFragment : Fragment() {
 
             val user = auth.currentUser
 
-            val propertyData = com.example.home_rental.Properties(title, type, year, judet, city, surface, price,money,
-                rooms, bath, parking, garage, airConditioner, garden, balcon, centrala, pool, internet, mobilat, description1!!, phone, null, firstImage)
+            val propertyData = com.example.home_rental.Properties(propertyID.toString(), title, type, year, judet, city, surface, price,money,
+                rooms, bath, parking, garage, airConditioner, garden, balcon, centrala, pool, internet, mobilat, description1!!, phone, null, firstImage, LocalDate.now().toString())
 
             databaseReference.child(propertyID.toString()).setValue(propertyData)
 
