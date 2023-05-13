@@ -54,6 +54,7 @@ class GalleryFragment : Fragment() {
     private var image_count = 0
     private lateinit var propertyID: UUID
     private lateinit var databaseReference: DatabaseReference
+    private lateinit var firstImage: String
 
     private val binding get() = _binding!!
 
@@ -69,6 +70,8 @@ class GalleryFragment : Fragment() {
         databaseReference = FirebaseDatabase.getInstance().getReference("properties").child(auth.uid.toString())
 
         binding.tvImageCount.setText("Au fost adaugate $image_count imagini")
+
+        firstImage = ""
 
         autoCompleteTextView = binding.actType
         adapterItems = ArrayAdapter<String>(requireActivity(), R.layout.list_item1, tip)
@@ -272,7 +275,7 @@ class GalleryFragment : Fragment() {
             val user = auth.currentUser
 
             val propertyData = com.example.home_rental.Properties(title, type, year, judet, city, surface, price,money,
-                rooms, bath, parking, garage, airConditioner, garden, balcon, centrala, pool, internet, mobilat, description1!!, phone, null)
+                rooms, bath, parking, garage, airConditioner, garden, balcon, centrala, pool, internet, mobilat, description1!!, phone, null, firstImage)
 
             databaseReference.child(propertyID.toString()).setValue(propertyData)
 
@@ -320,20 +323,8 @@ class GalleryFragment : Fragment() {
                 val uploadTask = storageRef.child("$uid/$propertyID/$sd").putFile(imageUri)
                 ++image_count
                 binding.tvImageCount.setText("Au fost adaugate $image_count imagini")
-                /*uploadTask.addOnSuccessListener {
-                    // using glide library to display the image
-                    storageRef.child("upload/$sd").downloadUrl.addOnSuccessListener {
-                        Glide.with(this)
-                            .load(it)
-                            .into(binding.ivImage)
-
-                        Log.e("Firebase", "download passed")
-                    }.addOnFailureListener {
-                        Log.e("Firebase", "Failed in downloading")
-                    }
-                }.addOnFailureListener {
-                    Log.e("Firebase", "Image Upload fail")
-                }*/
+                if(firstImage.isEmpty())
+                    firstImage = sd.toString()
             }
         }
 

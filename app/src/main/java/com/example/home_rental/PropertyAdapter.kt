@@ -11,6 +11,15 @@ import com.squareup.picasso.Picasso
 
 class PropertyAdapter(private val propertiesList : ArrayList<Properties>, private val onClickListener: View.OnClickListener) : RecyclerView.Adapter<PropertyAdapter.MyViewHolder> (){
 
+    /*private val imageUrlsList: ArrayList<String> = ArrayList()
+
+    fun setImageUrls(imageUrls: List<String>) {
+        imageUrlsList.clear()
+        imageUrlsList.addAll(imageUrls)
+        notifyDataSetChanged()
+    }*/
+
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -33,6 +42,15 @@ class PropertyAdapter(private val propertiesList : ArrayList<Properties>, privat
         holder.phone.text = "Telefon: " + property.phone
 
         holder.itemView.tag = position
+        val imageUrlsList = ArrayList<String>()
+        imageUrlsList.addAll(property.image!!)
+
+        val first = property.firstImage
+
+
+        if(first.isNotEmpty()){
+            Picasso.get().load(first).into(holder.image)
+        }
 
     }
 

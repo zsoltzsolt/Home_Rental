@@ -6,6 +6,7 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
@@ -18,7 +19,13 @@ import com.example.home_rental.R
 import com.example.home_rental.User
 import com.example.home_rental.databinding.FragmentHomeBinding
 import com.example.home_rental.ui.details.DetailsFragment
+import com.google.android.gms.tasks.Tasks
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.ktx.storage
+import com.squareup.picasso.Picasso
 
 class HomeFragment : Fragment() {
 
@@ -26,6 +33,7 @@ class HomeFragment : Fragment() {
     private lateinit var propertiesArrayList : ArrayList<Properties>
     private lateinit var propertyAdapter : PropertyAdapter
     private lateinit var db : DatabaseReference
+    private lateinit var storageRef : StorageReference
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
@@ -36,6 +44,8 @@ class HomeFragment : Fragment() {
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        storageRef = Firebase.storage.reference
 
         val onClickListener = OnClickListener { view ->
             val position = view.tag as Int
@@ -97,13 +107,52 @@ class HomeFragment : Fragment() {
                         val mobilat = propertySnapshot.child("mobilat").getValue(Boolean::class.java)
                         val description = propertySnapshot.child("description").getValue(String::class.java)
                         val phone = propertySnapshot.child("phone").getValue(String::class.java)
+                        var first_image_ad = propertySnapshot.child("firstImage").getValue(String::class.java)
 
-                        // Crează un obiect Properties cu valorile extrase
-                        val property = Properties(title!!, type!!, year!!, judet!!, city!!, surface!!, price!!, money!!,
-                            rooms!!, bath!!, parking!!, garage!!, airConditioner!!, garden!!, balcon!!, centrala!!, pool!!,
-                            internet!!, mobilat!!, description!!, phone!!, null)
+                        val imageUrls = ArrayList<String>()
 
-                        propertiesArrayList.add(property)
+                        if (first_image_ad != null) {
+                            first_image_ad = "$userID/$propertyID/$first_image_ad"
+                            val imageRef1 = storageRef.child(first_image_ad)
+                            imageRef1.downloadUrl.addOnSuccessListener { uri ->
+                                first_image_ad = uri.toString()
+                            }
+                        }
+
+
+
+
+                        val imageRef = storageRef.child("$userID/$propertyID")
+                        imageRef.listAll().addOnSuccessListener { result ->
+                            val downloadUrls = ArrayList<String>()
+
+                            // Obține toate URL-urile de descărcare pentru fiecare imagine
+                            val downloadTasks = result.items.map { imageFile ->
+                                imageFile.downloadUrl.addOnSuccessListener { uri ->
+                                    // Uri-ul imaginii descărcate
+                                    val imageUrl = uri.toString()
+
+                                    // Adaugă URL-ul imaginii în lista de URL-uri
+                                    downloadUrls.add(imageUrl)
+
+                                }
+                            }
+
+                            // Așteaptă finalizarea tuturor descărcărilor de imagini
+                            Tasks.whenAllSuccess<Void>(downloadTasks).addOnCompleteListener {
+                                // Adaugă toate URL-urile descărcate în lista finală de URL-uri
+                                imageUrls.addAll(downloadUrls)
+
+                                // Crează un obiect Properties cu valorile extrase și URL-urile imaginilor
+                                val property = Properties(title!!, type!!, year!!, judet!!, city!!, surface!!, price!!, money!!,
+                                    rooms!!, bath!!, parking!!, garage!!, airConditioner!!, garden!!, balcon!!, centrala!!, pool!!,
+                                    internet!!, mobilat!!, description!!, phone!!, imageUrls, first_image_ad!!)
+
+                                propertiesArrayList.add(property)
+                                propertyAdapter.notifyDataSetChanged() // Actualizează lista și reafișează imaginile
+                            }
+                        }
+
                     }
                 }
 

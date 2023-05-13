@@ -24,5 +24,6 @@ data class Properties(
     var mobilat: Boolean,
     var description: String,
     var phone: String,
-    var image: StorageReference?
+    var image: ArrayList<String>?,
+    var firstImage: String
 )
