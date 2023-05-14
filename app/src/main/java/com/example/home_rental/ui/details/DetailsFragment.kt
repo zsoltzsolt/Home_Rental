@@ -45,6 +45,12 @@ class DetailsFragment : Fragment() {
             if (property != null) {
                 val prop = property as com.example.home_rental.Properties
                 binding.tvDate.text = property.date
+                binding.tvTitle.text = property.title
+                binding.tvPrice.text = property.price.toString() + " " + property.money + "/luna"
+                binding.tvType.text = "Tip proprietate: " + property.type
+                binding.tvDescription.text = property.description
+                binding.tvProprietar.text = "Proprietar: " + property.username
+                binding.tvPhone.text = "Telefon: " + property.phone
                 imageList = property.image?.toList() ?: emptyList()
 
                 val adapter = ImageSliderAdapter(imageList)
