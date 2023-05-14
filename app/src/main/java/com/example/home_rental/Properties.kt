@@ -7,6 +7,7 @@ import kotlinx.parcelize.TypeParceler
 
 @Parcelize
 data class Properties(
+    var username: String,
     var id: String,
     var title: String,
     var type: String,

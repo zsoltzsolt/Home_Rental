@@ -93,7 +93,7 @@ class HomeFragment : Fragment() {
 
                     for (propertySnapshot in userSnapshot.children) {
                         val propertyID = propertySnapshot.key
-
+                        val username = propertySnapshot.child("username").getValue(String::class.java)
                         val title = propertySnapshot.child("title").getValue(String::class.java)
                         val type = propertySnapshot.child("type").getValue(String::class.java)
                         val year = propertySnapshot.child("year").getValue(Int::class.java)
@@ -153,7 +153,7 @@ class HomeFragment : Fragment() {
                                 imageUrls.addAll(downloadUrls)
 
                                 // Crează un obiect Properties cu valorile extrase și URL-urile imaginilor
-                                val property = Properties(propertyID!!, title!!, type!!, year!!, judet!!, city!!, surface!!, price!!, money!!,
+                                val property = Properties(username!!, propertyID!!, title!!, type!!, year!!, judet!!, city!!, surface!!, price!!, money!!,
                                     rooms!!, bath!!, parking!!, garage!!, airConditioner!!, garden!!, balcon!!, centrala!!, pool!!,
                                     internet!!, mobilat!!, description!!, phone!!, imageUrls?.toTypedArray(), first_image_ad!!, date!!)
 
