@@ -20,6 +20,7 @@ import com.example.home_rental.R
 import com.example.home_rental.databinding.FragmentDetailsBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import java.lang.StringBuilder
 import java.util.*
 
 class DetailsFragment : Fragment() {
@@ -51,19 +52,63 @@ class DetailsFragment : Fragment() {
                 binding.tvDescription.text = property.description
                 binding.tvProprietar.text = "Proprietar: " + property.username
                 binding.tvPhone.text = "Telefon: " + property.phone
+                binding.tvYear.text = property.year.toString()
+                binding.tvSurface.text = property.surface.toString()
+                binding.tvRooms.text = property.rooms.toString()
+                binding.tvBath.text = property.bath.toString()
                 imageList = property.image?.toList() ?: emptyList()
 
                 val adapter = ImageSliderAdapter(imageList)
                 viewPager.adapter = adapter
                 TabLayoutMediator(tabLayout, viewPager) { _, _ -> }.attach()
+
+                val facilitiesTv = binding.facilitati
+
+                val facilities = StringBuilder()
+
+                if (property.parking) {
+                    facilities.append("Parcare\n")
+                }
+
+                if (property.garage) {
+                    facilities.append("Garaj\n")
+                }
+
+                if (property.airConditioner) {
+                    facilities.append("Aer conditionat\n")
+                }
+
+                if (property.garden) {
+                    facilities.append("Gradina\n")
+                }
+
+                if (property.balcon) {
+                    facilities.append("Balcon\n")
+                }
+
+                if (property.centrala) {
+                    facilities.append("Centrala\n")
+                }
+
+                if (property.pool) {
+                    facilities.append("Piscina\n")
+                }
+
+                if (property.internet) {
+                    facilities.append("Internet\n")
+                }
+
+                if (property.mobilat) {
+                    facilities.append("Mobilat\n")
+                }
+
+                facilitiesTv.text = facilities.toString()
+
             }
         }
 
         return root
     }
-
-
-
 
     override fun onDestroyView() {
         super.onDestroyView()
