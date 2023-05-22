@@ -30,8 +30,7 @@ import com.example.home_rental.databinding.FragmentGalleryBinding
 import com.example.home_rental.ui.home.HomeFragment
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.google.firebase.database.core.Context
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
@@ -39,6 +38,7 @@ import com.google.firebase.storage.ktx.storage
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.Observable
 import kotlinx.coroutines.NonDisposableHandle.parent
+import java.time.LocalDate
 import java.util.*
 
 class GalleryFragment : Fragment() {
@@ -55,6 +55,7 @@ class GalleryFragment : Fragment() {
     private lateinit var propertyID: UUID
     private lateinit var databaseReference: DatabaseReference
     private lateinit var firstImage: String
+    private var username:String? = ""
 
     private val binding get() = _binding!!
 
@@ -272,16 +273,30 @@ class GalleryFragment : Fragment() {
             val description1 = editable?.toString()
             var phone = binding.tiePhone.text.toString().trim()
 
-            val user = auth.currentUser
+            val databaseRef = FirebaseDatabase.getInstance().getReference("users")
+            val userId = auth.currentUser?.uid
+            val username = "username"
+            var name = ""
+            val userRef = databaseRef.child(userId!!).child(username)
+            userRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        name = dataSnapshot.getValue(String::class.java)!!
+                    } else {
+                        name = "Necunoscut"
+                    }
+                    val propertyData = com.example.home_rental.Properties(name, propertyID.toString(), title, type, year, judet, city, surface, price,money,
+                        rooms, bath, parking, garage, airConditioner, garden, balcon, centrala, pool, internet, mobilat, description1!!, phone, null, firstImage, LocalDate.now().toString())
 
-            val propertyData = com.example.home_rental.Properties(title, type, year, judet, city, surface, price,money,
-                rooms, bath, parking, garage, airConditioner, garden, balcon, centrala, pool, internet, mobilat, description1!!, phone, null, firstImage)
+                    databaseReference.child(propertyID.toString()).setValue(propertyData)
 
-            databaseReference.child(propertyID.toString()).setValue(propertyData)
+                    Toast.makeText(requireContext(), "Proprietatea a fost aduagta!", Toast.LENGTH_SHORT).show()
 
-            Toast.makeText(requireContext(), "Proprietatea a fost aduagta!", Toast.LENGTH_SHORT).show()
-
-            findNavController().navigate(R.id.nav_home)
+                    findNavController().navigate(R.id.nav_home)
+                }
+                override fun onCancelled(databaseError: DatabaseError) {
+                }
+            })
 
         }
 

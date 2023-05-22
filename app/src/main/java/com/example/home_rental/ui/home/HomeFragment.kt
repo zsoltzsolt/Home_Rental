@@ -26,6 +26,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
 import com.squareup.picasso.Picasso
+import java.time.LocalDate
 
 class HomeFragment : Fragment() {
 
@@ -52,7 +53,12 @@ class HomeFragment : Fragment() {
             val property = propertiesArrayList[position]
             val newFragment = DetailsFragment()
 
-            findNavController().navigate(R.id.detailsFragment)
+            val bundle = Bundle()
+            bundle.putParcelable("key", property)
+
+            newFragment.arguments = bundle
+
+            findNavController().navigate(R.id.detailsFragment, bundle)
 
         }
 
@@ -75,6 +81,8 @@ class HomeFragment : Fragment() {
     }
 
 
+
+
     private fun EventChangeListener() {
         db.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -85,7 +93,7 @@ class HomeFragment : Fragment() {
 
                     for (propertySnapshot in userSnapshot.children) {
                         val propertyID = propertySnapshot.key
-
+                        val username = propertySnapshot.child("username").getValue(String::class.java)
                         val title = propertySnapshot.child("title").getValue(String::class.java)
                         val type = propertySnapshot.child("type").getValue(String::class.java)
                         val year = propertySnapshot.child("year").getValue(Int::class.java)
@@ -108,6 +116,7 @@ class HomeFragment : Fragment() {
                         val description = propertySnapshot.child("description").getValue(String::class.java)
                         val phone = propertySnapshot.child("phone").getValue(String::class.java)
                         var first_image_ad = propertySnapshot.child("firstImage").getValue(String::class.java)
+                        var date = propertySnapshot.child("date").getValue(String::class.java)
 
                         val imageUrls = ArrayList<String>()
 
@@ -144,9 +153,9 @@ class HomeFragment : Fragment() {
                                 imageUrls.addAll(downloadUrls)
 
                                 // Crează un obiect Properties cu valorile extrase și URL-urile imaginilor
-                                val property = Properties(title!!, type!!, year!!, judet!!, city!!, surface!!, price!!, money!!,
+                                val property = Properties(username!!, propertyID!!, title!!, type!!, year!!, judet!!, city!!, surface!!, price!!, money!!,
                                     rooms!!, bath!!, parking!!, garage!!, airConditioner!!, garden!!, balcon!!, centrala!!, pool!!,
-                                    internet!!, mobilat!!, description!!, phone!!, imageUrls, first_image_ad!!)
+                                    internet!!, mobilat!!, description!!, phone!!, imageUrls?.toTypedArray(), first_image_ad!!, date!!)
 
                                 propertiesArrayList.add(property)
                                 propertyAdapter.notifyDataSetChanged() // Actualizează lista și reafișează imaginile
