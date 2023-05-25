@@ -28,4 +28,5 @@
     <string name="titlul_anuntului">Titlul anuntului</string>
     <string name="numar_camere">Numar camere</string>
     <string name="telefon">Telefon</string>
+    <string name="title_activity_client_home">ClientHomeActivity</string>
 </resources>
