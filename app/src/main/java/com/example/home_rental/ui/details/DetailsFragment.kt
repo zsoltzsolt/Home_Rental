@@ -28,6 +28,8 @@ class DetailsFragment : Fragment() {
     private lateinit var viewPager: ViewPager2
     private lateinit var tabLayout: TabLayout
     private lateinit var imageList: List<String>
+    private lateinit var money: String
+    private var price  = 1.0
 
     private var _binding: FragmentDetailsBinding? = null
     private val binding get() = _binding!!
@@ -45,9 +47,12 @@ class DetailsFragment : Fragment() {
             val property = bundle.getParcelable<Parcelable>("key")
             if (property != null) {
                 val prop = property as com.example.home_rental.Properties
+                money = property.money
+                price = property.price
                 binding.tvDate.text = property.date
                 binding.tvTitle.text = property.title
                 binding.tvPrice.text = property.price.toString() + " " + property.money + "/luna"
+                binding.tvCalculatedPrice.text = property.price.toString() + "  " + property.money
                 binding.tvType.text = "Tip proprietate: " + property.type
                 binding.tvDescription.text = property.description
                 binding.tvProprietar.text = "Proprietar: " + property.username
@@ -107,6 +112,9 @@ class DetailsFragment : Fragment() {
             }
         }
 
+        binding.btnCalculatePrice.setOnClickListener {
+            binding.tvCalculatedPrice.text = (binding.tieMonths.text.toString().toDouble() * price).toString() + " " + money
+        }
         return root
     }
 

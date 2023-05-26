@@ -368,9 +368,9 @@
                         />
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/ti_full_name"
+                        android:id="@+id/ti_months"
                         style="@style/TextInputLayout"
-                        android:layout_width="50dp"
+                        android:layout_width="60dp"
                         android:layout_height="55dp"
                         android:layout_marginHorizontal="2dp"
                         android:layout_marginTop="5dp"
@@ -378,11 +378,12 @@
                         android:hint="">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/tie_full_name"
+                            android:id="@+id/tie_months"
                             style="@style/TextInputEditText"
                             android:textSize="14dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:maxLength="3"
                             android:background="@drawable/text_input_layout_shape"
                             />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -403,6 +404,7 @@
                     android:orientation="horizontal"
                     >
                 <Button
+                    android:id="@+id/btn_calculatePrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Calculeaza pret"
@@ -414,9 +416,9 @@
                     />
 
                 <TextView
+                    android:id="@+id/tv_calculatedPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="3300 lei"
                     android:textSize="16dp"
                     android:layout_marginLeft="40dp"
                     />
