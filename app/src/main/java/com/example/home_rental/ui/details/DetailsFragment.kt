@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -115,6 +116,11 @@ class DetailsFragment : Fragment() {
         binding.btnCalculatePrice.setOnClickListener {
             binding.tvCalculatedPrice.text = (binding.tieMonths.text.toString().toDouble() * price).toString() + " " + money
         }
+
+        binding.btnPay.setOnClickListener {
+            findNavController().navigate(R.id.payments)
+        }
+
         return root
     }
 
