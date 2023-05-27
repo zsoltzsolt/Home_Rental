@@ -22,11 +22,16 @@ import com.example.home_rental.ui.details.DetailsFragment
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
 import com.squareup.picasso.Picasso
 import java.time.LocalDate
+import java.util.Date
+import java.time.ZoneId
+import java.util.Calendar
+
 
 class HomeFragment : Fragment() {
 
@@ -87,6 +92,7 @@ class HomeFragment : Fragment() {
         db.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 propertiesArrayList.clear()
+                val currentDate = Date()
 
                 for (userSnapshot in dataSnapshot.children) {
                     val userID = userSnapshot.key
@@ -117,6 +123,14 @@ class HomeFragment : Fragment() {
                         val phone = propertySnapshot.child("phone").getValue(String::class.java)
                         var first_image_ad = propertySnapshot.child("firstImage").getValue(String::class.java)
                         var date = propertySnapshot.child("date").getValue(String::class.java)
+                        var dateStart = propertySnapshot.child("dateStart").getValue(Date::class.java)
+                        var dateStop = propertySnapshot.child("dateStop").getValue(Date::class.java)
+                        var ownerID = propertySnapshot.child("proprietarID").getValue(String::class.java)
+                        var clientID = propertySnapshot.child("clientID").getValue(String::class.java)
+
+                        if (dateStop != null && dateStop.after(currentDate)) {
+                            continue  // Treci la urmatoarea iteratie
+                        }
 
                         val imageUrls = ArrayList<String>()
 
@@ -153,9 +167,9 @@ class HomeFragment : Fragment() {
                                 imageUrls.addAll(downloadUrls)
 
                                 // Crează un obiect Properties cu valorile extrase și URL-urile imaginilor
-                                val property = Properties(username!!, propertyID!!, title!!, type!!, year!!, judet!!, city!!, surface!!, price!!, money!!,
+                                val property = Properties(ownerID!!, clientID!!, username!!, propertyID!!, title!!, type!!, year!!, judet!!, city!!, surface!!, price!!, money!!,
                                     rooms!!, bath!!, parking!!, garage!!, airConditioner!!, garden!!, balcon!!, centrala!!, pool!!,
-                                    internet!!, mobilat!!, description!!, phone!!, imageUrls?.toTypedArray(), first_image_ad!!, date!!)
+                                    internet!!, mobilat!!, description!!, phone!!, imageUrls?.toTypedArray(), first_image_ad!!, date!!, dateStart!!, dateStop!!)
 
                                 propertiesArrayList.add(property)
                                 propertyAdapter.notifyDataSetChanged() // Actualizează lista și reafișează imaginile

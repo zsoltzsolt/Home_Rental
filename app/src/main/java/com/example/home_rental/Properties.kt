@@ -4,9 +4,12 @@ import android.os.Parcelable
 import android.os.Parcel
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.TypeParceler
+import java.util.Date
 
 @Parcelize
 data class Properties(
+    var proprietarID: String,
+    var clientID: String,
     var username: String,
     var id: String,
     var title: String,
@@ -32,7 +35,9 @@ data class Properties(
     var phone: String,
     var image: Array<String>?,
     var firstImage: String,
-    var date: String
+    var date: String,
+    var dateStart: Date,
+    var dateStop:  Date
 ) : Parcelable
 
 

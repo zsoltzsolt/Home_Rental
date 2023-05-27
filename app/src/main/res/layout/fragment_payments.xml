@@ -33,6 +33,7 @@
             />
 
         <TextView
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Titlu anunt: Casa de vanzare"
@@ -42,6 +43,7 @@
             />
 
             <TextView
+                android:id="@+id/tv_months"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Numar luni: 12"
@@ -51,6 +53,7 @@
                 />
 
             <TextView
+                android:id="@+id/tv_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Pret: 2000 lei"
@@ -170,13 +173,13 @@
 
 
         <Button
+            android:id="@+id/btnPlateste"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:layout_marginHorizontal="30dp"
             android:layout_marginBottom="20dp"
-            style="@style/WhiteButton"
-            android:backgroundTint="@color/purple_500"
+            style="@style/GreyButton"
             android:textColor="@color/white"
             android:text="Plateste"
             app:layout_constraintTop_toBottomOf="@id/ti_expirare"

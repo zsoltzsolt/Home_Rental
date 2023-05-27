@@ -26,6 +26,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
+import java.util.Date
 
 class SlideshowFragment : Fragment() {
 
@@ -94,6 +95,8 @@ class SlideshowFragment : Fragment() {
 
                     if(userID.equals(auth.uid)) {
                         for (propertySnapshot in userSnapshot.children) {
+                            val proprietarID = propertySnapshot.child("proprietarID").getValue(String::class.java)
+                            val clientID = propertySnapshot.child("clientID").getValue(String::class.java)
                             val propertyID = propertySnapshot.key
                             val username =
                                 propertySnapshot.child("username").getValue(String::class.java)
@@ -131,6 +134,8 @@ class SlideshowFragment : Fragment() {
                             var first_image_ad =
                                 propertySnapshot.child("firstImage").getValue(String::class.java)
                             var date = propertySnapshot.child("date").getValue(String::class.java)
+                            var dateStart = propertySnapshot.child("dateStart").getValue(Date::class.java)
+                            var dateStop = propertySnapshot.child("dateStop").getValue(Date::class.java)
 
                             val imageUrls = ArrayList<String>()
 
@@ -166,6 +171,8 @@ class SlideshowFragment : Fragment() {
 
                                     // Crează un obiect Properties cu valorile extrase și URL-urile imaginilor
                                     val property = Properties(
+                                        proprietarID!!,
+                                        clientID!!,
                                         username!!,
                                         propertyID!!,
                                         title!!,
@@ -191,7 +198,9 @@ class SlideshowFragment : Fragment() {
                                         phone!!,
                                         imageUrls?.toTypedArray(),
                                         first_image_ad!!,
-                                        date!!
+                                        date!!,
+                                        dateStart!!,
+                                        dateStop!!
                                     )
 
                                     propertiesArrayList.add(property)
