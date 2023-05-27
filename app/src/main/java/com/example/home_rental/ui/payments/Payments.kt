@@ -30,6 +30,9 @@ class Payments : Fragment() {
     private lateinit var tie_cvv: TextInputEditText
     private var months = 1
 
+    val currentUser = FirebaseAuth.getInstance().currentUser
+    val userId1 = currentUser?.uid // ID-ul utilizatorului curent
+
 
     private var _binding: FragmentPaymentsBinding? = null
     private val binding get() = _binding!!
@@ -70,6 +73,7 @@ class Payments : Fragment() {
                 val propertyUpdates = HashMap<String, Any>()
                 propertyUpdates["dateStart"] = Calendar.getInstance().time
                 propertyUpdates["dateStop"] = cal
+                propertyUpdates["clientID"] = userId1.toString()
                 propertyRef.updateChildren(propertyUpdates)
             }
         }

@@ -25,4 +25,9 @@
         android:name="com.example.home_rental.ui.payments.Payments"
         android:label="Plata"
         tools:layout="@layout/fragment_payments" />
+    <fragment
+        android:id="@+id/rentedFragment"
+        android:name="com.example.home_rental.ui.rented.RentedFragment"
+        android:label="fragment_rented"
+        tools:layout="@layout/fragment_rented" />
 </navigation>

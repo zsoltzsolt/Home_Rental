@@ -26,4 +26,14 @@
         android:id="@+id/detailsFragment"
         android:name="com.example.home_rental.ui.details.DetailsFragment"
         android:label="Detalii" />
+    <fragment
+        android:id="@+id/rentedFragment"
+        android:name="com.example.home_rental.ui.rented.RentedFragment"
+        android:label="fragment_rented"
+        tools:layout="@layout/fragment_rented" />
+    <fragment
+        android:id="@+id/payments"
+        android:name="com.example.home_rental.ui.payments.Payments"
+        android:label="fragment_payments"
+        tools:layout="@layout/fragment_payments" />
 </navigation>
