@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.example.home_rental.R
 import com.example.home_rental.databinding.FragmentDetailsBinding
 import com.example.home_rental.databinding.FragmentPaymentsBinding
@@ -192,6 +193,7 @@ class Payments : Fragment() {
 
         binding.btnPlateste.setOnClickListener {
             updateDates(months)
+            findNavController().navigate(R.id.nav_home)
         }
 
         return root
