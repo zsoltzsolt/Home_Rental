@@ -10,14 +10,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.transition.Transition
 import com.example.home_rental.ImageSliderAdapter
+import com.example.home_rental.PaymentDetails
 import com.example.home_rental.Properties
 import com.example.home_rental.R
 import com.example.home_rental.databinding.FragmentDetailsBinding
+import com.example.home_rental.ui.payments.Payments
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import java.lang.StringBuilder
@@ -28,6 +31,10 @@ class DetailsFragment : Fragment() {
     private lateinit var viewPager: ViewPager2
     private lateinit var tabLayout: TabLayout
     private lateinit var imageList: List<String>
+    private lateinit var money: String
+    private lateinit var id: String
+    private lateinit var ownerID: String
+    private var price  = 1.0
 
     private var _binding: FragmentDetailsBinding? = null
     private val binding get() = _binding!!
@@ -45,9 +52,14 @@ class DetailsFragment : Fragment() {
             val property = bundle.getParcelable<Parcelable>("key")
             if (property != null) {
                 val prop = property as com.example.home_rental.Properties
+                money = property.money
+                price = property.price
+                id = property.id
+                ownerID = property.proprietarID
                 binding.tvDate.text = property.date
                 binding.tvTitle.text = property.title
                 binding.tvPrice.text = property.price.toString() + " " + property.money + "/luna"
+                binding.tvCalculatedPrice.text = property.price.toString() + "  " + property.money
                 binding.tvType.text = "Tip proprietate: " + property.type
                 binding.tvDescription.text = property.description
                 binding.tvProprietar.text = "Proprietar: " + property.username
@@ -57,6 +69,7 @@ class DetailsFragment : Fragment() {
                 binding.tvRooms.text = property.rooms.toString()
                 binding.tvBath.text = property.bath.toString()
                 imageList = property.image?.toList() ?: emptyList()
+
 
                 val adapter = ImageSliderAdapter(imageList)
                 viewPager.adapter = adapter
@@ -105,6 +118,21 @@ class DetailsFragment : Fragment() {
                 facilitiesTv.text = facilities.toString()
 
             }
+        }
+
+        binding.btnCalculatePrice.setOnClickListener {
+            binding.tvCalculatedPrice.text = (binding.tieMonths.text.toString().toDouble() * price).toString() + " " + money
+        }
+
+        binding.btnPay.setOnClickListener {
+            val details = PaymentDetails(ownerID, id, binding.tvTitle.text.toString(), binding.tieMonths.text.toString().toInt(), binding.tvCalculatedPrice.text.toString())
+            val bundle = Bundle()
+            bundle.putParcelable("key1", details)
+            val newFragment = Payments()
+
+            newFragment.arguments = bundle
+
+            findNavController().navigate(R.id.payments, bundle)
         }
 
         return root

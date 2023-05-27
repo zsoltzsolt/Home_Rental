@@ -285,8 +285,11 @@ class GalleryFragment : Fragment() {
                     } else {
                         name = "Necunoscut"
                     }
-                    val propertyData = com.example.home_rental.Properties(name, propertyID.toString(), title, type, year, judet, city, surface, price,money,
-                        rooms, bath, parking, garage, airConditioner, garden, balcon, centrala, pool, internet, mobilat, description1!!, phone, null, firstImage, LocalDate.now().toString())
+                    val calendar = Calendar.getInstance()
+                    calendar.add(Calendar.DAY_OF_YEAR, -1)
+                    val yesterday = calendar.time
+                    val propertyData = com.example.home_rental.Properties(userId, "1", name, propertyID.toString(), title, type, year, judet, city, surface, price,money,
+                        rooms, bath, parking, garage, airConditioner, garden, balcon, centrala, pool, internet, mobilat, description1!!, phone, null, firstImage, LocalDate.now().toString(), yesterday, yesterday)
 
                     databaseReference.child(propertyID.toString()).setValue(propertyData)
 
